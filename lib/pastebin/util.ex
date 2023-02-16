@@ -30,8 +30,9 @@ defmodule Pastebin.Util do
 
   def parse_response(resp) do
     case resp do
-      {:ok, resp} -> resp
-      {:error, _} -> "Error"
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> {:ok, body}
+      {:ok, %HTTPoison.Response{body: body}} -> {:error, body}
+      {:error, %HTTPoison.Error{reason: reason}} -> {:error, reason}
     end
   end
 end
