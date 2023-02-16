@@ -3,6 +3,10 @@ defmodule Pastebin.Util do
     "https://pastebin.com/api/"
   end
 
+  def get_raw_url() do
+    "https://pastebin.com/raw/"
+  end
+
   def to_param_list(map) do
     get_dev_key(map)
     |> case do
