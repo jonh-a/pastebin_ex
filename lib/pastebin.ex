@@ -1,6 +1,6 @@
 defmodule Pastebin do
   @moduledoc """
-  Documentation for `Pastebin`.
+  Unofficial Elixir wrapper for the Pastebin SDK.
   """
 
   use HTTPoison.Base

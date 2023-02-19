@@ -1,4 +1,8 @@
 defmodule Pastebin.Pastes do
+  @moduledoc """
+  Create, read, and delete pastes.
+  """
+
   @doc """
   Create a new paste.
 
@@ -31,16 +35,31 @@ defmodule Pastebin.Pastes do
   Fetch pastes for a given user. This data is returned in XML format.
 
   ## Examples
-      iex > p = %{"api_user_key" => "redacted"}
-      iex > Pastebin.Pastes.get_user_pastes(p)
-      {:ok, "No pastes found."}
+      iex > Pastebin.Pastes.get_user_pastes(%{"api_user_key" => "redacted"})
+      {:ok,
+        %{
+          "data" => %{
+            "paste" => %{
+              "paste_date" => "redacted",
+              "paste_expire_date" => "0",
+              "paste_format_long" => "None",
+              "paste_format_short" => "text",
+              "paste_hits" => "1",
+              "paste_key" => "redacted",
+              "paste_private" => "0",
+              "paste_size" => "4",
+              "paste_title" => "Untitled",
+              "paste_url" => "https://pastebin.com/redacted"
+            }
+          }
+        }}
   """
   def get_user_pastes(params) do
     Pastebin.post(
       "#{Pastebin.Util.get_base_url()}api_post.php",
       {:form, Pastebin.Util.to_param_list(Map.put(params, "api_option", "list"))}
     )
-    |> Pastebin.Util.parse_response()
+    |> Pastebin.Util.parse_response(true)
   end
 
   @doc """

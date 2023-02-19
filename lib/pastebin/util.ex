@@ -1,4 +1,8 @@
 defmodule Pastebin.Util do
+  @moduledoc """
+  Various utility functions.
+  """
+
   def get_base_url(), do: "https://pastebin.com/api/"
 
   def get_raw_url(), do: "https://pastebin.com/raw/"
@@ -28,11 +32,24 @@ defmodule Pastebin.Util do
     end
   end
 
-  def parse_response(resp) do
+  defp convert_xml_to_map(xml) do
+    ("<data>" <> xml <> "</data>")
+    |> XmlToMap.naive_map()
+  end
+
+  def parse_response(resp, xml \\ false) do
     case resp do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> {:ok, body}
-      {:ok, %HTTPoison.Response{body: body}} -> {:error, body}
-      {:error, %HTTPoison.Error{reason: reason}} -> {:error, reason}
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        case xml do
+          true -> {:ok, convert_xml_to_map(body)}
+          false -> {:ok, body}
+        end
+
+      {:ok, %HTTPoison.Response{body: body}} ->
+        {:error, body}
+
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        {:error, reason}
     end
   end
 end

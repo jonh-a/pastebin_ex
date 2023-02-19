@@ -1,6 +1,6 @@
 # Pastebin
 
-**TODO: Add description**
+Unofficial Elixir wrapper for the Pastebin API.
 
 ## Installation
 

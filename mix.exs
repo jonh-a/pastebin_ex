@@ -24,6 +24,7 @@ defmodule Pastebin.MixProject do
       {:httpoison, "~> 1.8"},
       {:poison, "~> 5.0"},
       {:exjsx, "~> 4.0"},
+      {:elixir_xml_to_map, "~> 3.0"},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end
