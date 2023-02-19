@@ -1,11 +1,7 @@
 defmodule Pastebin.Util do
-  def get_base_url() do
-    "https://pastebin.com/api/"
-  end
+  def get_base_url(), do: "https://pastebin.com/api/"
 
-  def get_raw_url() do
-    "https://pastebin.com/raw/"
-  end
+  def get_raw_url(), do: "https://pastebin.com/raw/"
 
   def to_param_list(map) do
     get_dev_key(map)
@@ -16,7 +12,7 @@ defmodule Pastebin.Util do
     |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
   end
 
-  def get_dev_key(params) do
+  defp get_dev_key(params) do
     params
     |> Map.fetch(:api_dev_key)
     |> case do
