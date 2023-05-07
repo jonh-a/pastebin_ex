@@ -3,6 +3,7 @@ defmodule Pastebin.Pastes do
   Create, read, and delete pastes.
   """
 
+  @spec create_paste!(map) :: {:error, any} | {:ok, any}
   @doc """
   Create a new paste.
 
@@ -19,6 +20,7 @@ defmodule Pastebin.Pastes do
     |> Pastebin.Util.parse_response()
   end
 
+  @spec get_public_paste(String.t()) :: {:error, any} | {:ok, any}
   @doc """
   Fetch a paste by ID
 
@@ -31,6 +33,7 @@ defmodule Pastebin.Pastes do
     |> Pastebin.Util.parse_response()
   end
 
+  @spec get_user_pastes(map) :: {:error, any} | {:ok, any}
   @doc """
   Fetch pastes for a given user. This data is returned in XML format.
 
@@ -62,6 +65,7 @@ defmodule Pastebin.Pastes do
     |> Pastebin.Util.parse_response(true)
   end
 
+  @spec delete_user_paste!(map, any) :: {:error, any} | {:ok, any}
   @doc """
   Deletes a paste from a given user's account.
 
@@ -81,6 +85,7 @@ defmodule Pastebin.Pastes do
     |> Pastebin.Util.parse_response()
   end
 
+  @spec get_user_paste(map, any) :: {:error, any} | {:ok, any}
   @doc """
   Fetch a paste (including private or unlisted pastes) from a user's account.
 

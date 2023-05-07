@@ -3,6 +3,7 @@ defmodule Pastebin.Users do
   Authenticate and view user account settings.
   """
 
+  @spec get_user_key!(map) :: {:error, any} | {:ok, any}
   @doc """
   Generate an api_user_key for authenticated requests.
 
@@ -19,6 +20,7 @@ defmodule Pastebin.Users do
     |> Pastebin.Util.parse_response()
   end
 
+  @spec get_account_settings(map) :: {:error, any} | {:ok, any}
   @doc """
   Fetch account details for a given user. This data is returned in XML format.
 
